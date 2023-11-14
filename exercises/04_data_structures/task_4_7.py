@@ -20,3 +20,7 @@ mac_dev = mac.split(':')
 mac1 = int(mac_dev[0],16)
 mac2 = int(mac_dev[1],16)
 mac3 = int(mac_dev[2],16)
+
+template_mac="{:b}{:b}{:b}"
+print(template_mac.format(mac1,mac2,mac3))
+
