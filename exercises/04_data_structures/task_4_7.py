@@ -16,3 +16,7 @@
 """
 
 mac = "AAAA:BBBB:CCCC"
+mac_dev = mac.split(':')
+mac1 = int(mac_dev[0],16)
+mac2 = int(mac_dev[1],16)
+mac3 = int(mac_dev[2],16)
