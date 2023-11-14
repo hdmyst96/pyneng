@@ -1,0 +1,55 @@
+							Data type 
+1) funzione sono dei  non collegata ad alcuna variabile, generale
+2)metodi - funzione collegata ad un tipo di variabile, tipo di data
+
+Due tipi di data type 
+Cambiabile: list, dictionary,
+Non cambiabile: numeri, string,
+
+
+a) variabili
+
+b) strings
+Quali azioni si puo fare con strings con aiuto di metodi 
+	.count - contare
+	.find - 
+	.startswitch - inizio della parola quale indichiamo nel ()
+	.endswitch - la fine ....
+	.replace - renomina un elemento nello string 
+	.strip - elminiare i simboli speciale dal inizio e dalla fine dei string 
+	.split - divide la string in base ai whitespaces, permette a fare una list dei elementi
+	.format - formazione dei string, cioe aggiungere qualche elemento nel un template / aggiunge un elemento nel  "{}"
+
+c) List
+	esempi:  list1 = [10,20,30,77]
+			 list1=list('method')
+	Metodi :
+	.append - aggiungere un elemento alla fine della lista
+	.copy - fare una copia della lista 
+	.insert[index, elemento] aggiungere elementri nella lista tra gli altri elementi 
+	.extend([]) aggiungere piu elementi alla fine della lista 
+	.pop - eliminare un elemento della lista usando index
+	.remove - eliminare un elemento della lista usando numero 
+	.sort - sortare una lista
+	','.join() - trasforma una lista in una stringa, contrario al split
+
+d) Dictionary 
+	syntax: a = {'name': 'name', 
+	E un data type cambiabile si puo aggiungere dati di seguito
+		var['name'] = 'name'
+	Con del var['name'] si puo cancellare un elemento
+	Metodi :
+	.copy - fare una copia della dict
+	.clear - cancellare  elementi del dict.
+	.get - se non c'e elemento python ti da errore, con questo metodo puoi ottenere None invece di errore
+	.setdefault - quando non c'e  un elemento, lo aggiunge di seguito con valore None 
+	.keys - tutti gli chiavi del dic
+	.values - tutti i valori
+	.items pair chiavi / valore 
+	.update - aggiornare il dict. / unire due dict in uno
+	dict.fromkeys(variabilelista) - quando hai dei key ma non sai ancora gli values, quindi crea del dict con valore none
+
+e) Tuple 
+
+
+
