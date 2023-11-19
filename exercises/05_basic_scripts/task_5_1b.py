@@ -55,4 +55,4 @@ london_co = {
     },
 }
 
-print(london_co[str(router)][str(models)]) 
+print(london_co[router][models]) 

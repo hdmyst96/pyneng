@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 5.1c
@@ -24,6 +25,8 @@ $ python task_5_1c.py
 решить без использования условия if.
 """
 
+router = input('Enter the router name: ')
+models = input('Enter name of setting (location, vendor, model, ios, ip): ')
 london_co = {
     "r1": {
         "location": "21 New Globe Walk",
@@ -49,3 +52,5 @@ london_co = {
         "routing": True,
     },
 }
+
+print(london_co.get(router).get(models, "Setting not find, try again"))
