@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 5.1b
@@ -24,6 +25,9 @@ $ python task_5_1b.py
 Все задания надо выполнять используя только пройденные темы. То есть эту задачу можно
 решить без использования условия if.
 """
+router = input('Enter the router name: ')
+models = input('Enter name of setting (location, vendor, model, ios, ip): ')
+
 
 london_co = {
     "r1": {
@@ -50,3 +54,5 @@ london_co = {
         "routing": True,
     },
 }
+
+print(london_co[str(router)][str(models)]) 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 5.1a
@@ -18,6 +19,8 @@ $ python task_5_1a.py
 Все задания надо выполнять используя только пройденные темы. То есть эту задачу можно
 решить без использования условия if.
 """
+router = input('Enter the router name ')
+model = input('Enter the route version ')
 
 london_co = {
     "r1": {
@@ -44,3 +47,5 @@ london_co = {
         "routing": True,
     },
 }
+
+print(london_co[str(router)][str(model)])
