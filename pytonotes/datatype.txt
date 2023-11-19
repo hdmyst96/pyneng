@@ -27,9 +27,10 @@ c) List
 	.append - aggiungere un elemento alla fine della lista
 	.copy - fare una copia della lista 
 	.insert[index, elemento] aggiungere elementri nella lista tra gli altri elementi 
-	.extend([]) aggiungere piu elementi alla fine della lista 
-	.pop - eliminare un elemento della lista usando index
-	.remove - eliminare un elemento della lista usando numero 
+	.extend([]) aggiungere piu elementi alla fine della lista, non ha output,
+	 cambia direttamente l'elemento.
+	.pop - eliminare un elemento della lista usando index (ha un output )
+	.remove - eliminare un elemento della lista usando numero (no output, cambia direttamente l'elemento)
 	.sort - sortare una lista
 	','.join() - trasforma una lista in una stringa, contrario al split
 
