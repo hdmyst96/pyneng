@@ -1,0 +1,13 @@
+								Scripts
+	Deve iniziare con #!/user/bin/env python3 
+	Devono avere il format .py alla fine 
+
+	'\n'.join(name) - per transformare una lista in una singola string
+	
+	Per lavorare con i argumenti si usa :
+	from sys import argv  / name = sys,argv[1] 
+ 	
+	Per chiedere un input dal user si fa 
+	input('name: ') - resultato sara sempre un string
+	Per convertire in un int si puo fare int(input('name: '))
+
