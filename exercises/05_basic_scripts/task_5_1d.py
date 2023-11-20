@@ -19,7 +19,7 @@ $ python task_5_1d.py
 """
 key= input('Enter router name: ')
 value= input('Enter the setting (location,vendor,model,ios,ip): ')
-value.lower()
+value = value.lower()
 
 london_co = {
     "r1": {
