@@ -17,6 +17,9 @@ $ python task_5_1d.py
 Все задания надо выполнять используя только пройденные темы. То есть эту задачу можно
 решить без использования условия if.
 """
+key= input('Enter router name: ')
+value= input('Enter the setting (location,vendor,model,ios,ip): ')
+value.lower()
 
 london_co = {
     "r1": {
@@ -43,3 +46,4 @@ london_co = {
         "routing": True,
     },
 }
+print(london_co.get(key).get(value, "Setting not found!"))
