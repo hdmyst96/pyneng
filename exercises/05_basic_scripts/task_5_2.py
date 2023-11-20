@@ -30,3 +30,14 @@ Out[1]: '11111111111111111111111111110000'
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+ipmask = input('insert ip and mask: ')
+ipmasklist = ipmask.split('/')
+ip = ipmasklist[0:1]
+ipmasklist[0:1]
+
+network_template = '''
+    ...: Network
+    ...: {:8b} {:8b} {:8b} {:8b}
+    ...: '''
+
+
