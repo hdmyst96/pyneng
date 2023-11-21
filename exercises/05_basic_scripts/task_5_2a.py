@@ -49,6 +49,16 @@ bin_ip = "00001010000000010000000111000011"
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+#chiedere al utente di inserire il ip ed il mask
+ipmask = input('insert ip and mask: ')
+
+#dividere ip dal mask
+ipmask = ipmask.split('/')
+ip = ipmask[0:1]
+ip = '.'.join(ip)
+ip = ip.split('.')
+ip_template = '''{:08}.{:08}.{:08}.{:08} '''
+ip_bin =  ip_template.format(int(ip[0]),int(ip[1]),int(ip[2]),int(ip[3]))
 
 #convertire il ip in nr binario 
 network_template = '''
