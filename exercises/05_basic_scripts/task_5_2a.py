@@ -60,6 +60,14 @@ ip = ip.split('.')
 ip_template = '''{:08}.{:08}.{:08}.{:08} '''
 ip_bin =  ip_template.format(int(ip[0]),int(ip[1]),int(ip[2]),int(ip[3]))
 
+#convertire gli ultimi bit nel ip address per arrivare ad network mask !
+replace_ip =  ip_bin[0:-4]
+replace_ip1 = ip_bin[31:]
+replace_ip1 = replace_ip1.replace("1", "0")
+ip_bin = replace_ip + replace_ip1 
+
+
+
 #convertire il ip in nr binario 
 network_template = '''
      Network:
