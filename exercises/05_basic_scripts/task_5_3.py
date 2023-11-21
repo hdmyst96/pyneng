@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 5.3
@@ -49,6 +50,15 @@ switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk allowed vlan 2,3,4,5
 """
+port = input("Inserisce il porto di accesso(access/trunk): ")
+inter = input("Inserice la interfaccia(numero/tipo): ")
+v = input("Inserisci i numeri di vlans: ")
+
+#aggiungere delimitatore 
+print("" * 100)
+
+#Mostrare interfaccia 
+print("interface {}".format(inter))
 
 access_template = [
     "switchport mode access",
@@ -63,3 +73,9 @@ trunk_template = [
     "switchport mode trunk",
     "switchport trunk allowed vlan {}",
 ]
+
+#transformare le liste in un dizionario per poter chiamare la sezione(trunk/acc.)
+templates = {'access': access_template, 'trunk': trunk_template}
+
+print('\n'.join(templates[port]).format(v))
+
