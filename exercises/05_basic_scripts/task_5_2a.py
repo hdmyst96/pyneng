@@ -1,3 +1,4 @@
+#!/usr/bin/env python3 
 # -*- coding: utf-8 -*-
 """
 Задание 5.2a
@@ -57,25 +58,27 @@ ipmask = ipmask.split('/')
 ip = ipmask[0:1]
 ip = '.'.join(ip)
 ip = ip.split('.')
-ip_template = '''{:08}.{:08}.{:08}.{:08} '''
+ip_template = '''{:08b}.{:08b}.{:08b}.{:08b} '''
 ip_bin =  ip_template.format(int(ip[0]),int(ip[1]),int(ip[2]),int(ip[3]))
 
 #convertire gli ultimi bit nel ip address per arrivare ad network mask !
-replace_ip =  ip_bin[0:-4]
+replace_ip =  ip_bin[0:-5]
 replace_ip1 = ip_bin[31:]
 replace_ip1 = replace_ip1.replace("1", "0")
 ip_bin = replace_ip + replace_ip1 
+ip =  ip_bin.split('.')
+
 
 
 
 #convertire il ip in nr binario 
 network_template = '''
      Network:
-     {0:<8} {1:<8} {2:<8} {3:<8}
-     {0:08b} {1:08b} {2:08b} {3:08b}
+     {:<8} {:<8} {:<8} {:<8}
+     {:08} {:08} {:08} {:08}
      '''
 #mostrare ip in nr binario e normale
-print(network_template.format(int(ip[0]),int(ip[1]),int(ip[2]),int(ip[3])))
+print(network_template.format(int(ip[0],2),int(ip[1],2),int(ip[2],2),int(ip[3],2),int(ip[0]),int(ip[1]),int(ip[2]),int(ip[3])))
 
 #incapsulre il mask in una variabile 
 maskd = ipmask[1:2]
