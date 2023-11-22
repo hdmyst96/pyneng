@@ -1,3 +1,4 @@
+#!/usr/bin/env python3 
 # -*- coding: utf-8 -*-
 """
 Задание 5.3a
@@ -11,6 +12,17 @@ VLANа или списка VLANов:
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 То есть эту задачу можно решить без использования условия if и циклов for/while.
 """
+inter = input("Inserice la interfaccia(numero/tipo): ")
+port = input("Inserisce il porto di accesso(access/trunk): ")
+
+v = {"access": ("variant1: "), "trunk": ("variant2: ") }
+v = input(v[port])   
+
+#aggiungere delimitatore 
+print("" * 100)
+
+#Mostrare interfaccia 
+print("interface {}".format(inter))
 
 access_template = [
     "switchport mode access",
@@ -25,3 +37,9 @@ trunk_template = [
     "switchport mode trunk",
     "switchport trunk allowed vlan {}",
 ]
+
+#transformare le liste in un dizionario per poter chiamare la sezione(trunk/acc.)
+templates = {'access': access_template, 'trunk': trunk_template}
+
+print('\n'.join(templates[port]).format(v))
+
