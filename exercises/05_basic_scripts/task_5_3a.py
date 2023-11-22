@@ -15,7 +15,7 @@ VLANа или списка VLANов:
 inter = input("Inserice la interfaccia(numero/tipo): ")
 port = input("Inserisce il porto di accesso(access/trunk): ")
 
-v = {"access": ("variant1: "), "trunk": ("variant2: ") }
+v = {"access": ("Inserice numeri  di VLAN: "), "trunk": ("Inserice Vlan accessibile: ") }
 v = input(v[port])   
 
 #aggiungere delimitatore 
