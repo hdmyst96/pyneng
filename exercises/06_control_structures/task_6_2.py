@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 6.2
@@ -12,3 +13,22 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+ip = input('Inserisci IP: ')
+ip_list = ip.split('.')
+
+for int in ip_list:
+    if '1' <= int  <= '223':
+        print('unicast')
+        break
+    elif '224'<= int <= '239':
+        print('multicast')
+        break
+    if ip_list == ['255', '255', '255', '255']: 
+        print('local broadcast')
+        break
+    elif ip_list == ['0','0','0','0']:
+        print('unassigned') 
+        break
+    else: 
+        print('unused')
+        break 
