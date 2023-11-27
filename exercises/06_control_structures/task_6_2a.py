@@ -23,26 +23,24 @@ ip_list = ip.split('.')
 
 #Verification programm
 for octet in ip_list:
-    if len(ip_list) == 4 and not octet.isnumeric():
+    if len(ip_list) != 4:
+        print('ip address sbagliato')
+        break
+    elif not octet.isnumeric():
         print('ip address sbagliato')
         break
     elif octet >= '255':
         print('ip address sbagliato')
-        break
-
-for int in ip_list:
-    if '1' <= octet  <= '223':
-        print('unicast')
-        break
-    elif '224'<= octet<= '239':
-        print('multicast')
-        break
-    if ip_list == ['255', '255', '255', '255']:
-        print('local broadcast')
-        break
-    elif ip_list == ['0','0','0','0']:
-        print('unassigned')
-        break
-    else:
-        print('unused')
-        break
+        break        
+#Main programm 
+oct = ip.split('.')[0]
+if '1' <= oct  <= '223':
+    print('unicast')
+elif '224'<= oct<= '239':
+    print('multicast')
+elif ip_list == ['255', '255', '255', '255']:
+    print('local broadcast')
+elif ip_list == ['0','0','0','0']:
+    print('unassigned')
+else:
+    print('unused')
