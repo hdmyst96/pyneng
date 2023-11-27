@@ -20,29 +20,25 @@
 """ 
 ip = input('Inserisci IP: ')
 ip_list = ip.split('.')
-
-
-ip = input('Inserisci IP: ')
-ip_list = ip.split('.')
 ip_correct = False
 oct = ip.split('.')[0]
 #Verification programm
 while not ip_correct:
     if len(ip_list) != 4:
         print('ip address sbagliato')
-        ip_correct = True 
+        ip_correct = True
         break
     for int in ip_list:
         if not int.isnumeric():
             print('ip address sbagliato')
-            ip_correct = True    
-            break        
+            ip_correct = True
+            break
         elif int > '255':
             print('ip address sbagliato')
             ip_correct = True
             break
 #Main programm 
-    else: 
+    else:
 
         if ip_list == ['255', '255', '255', '255']:
             print('local broadcast')
