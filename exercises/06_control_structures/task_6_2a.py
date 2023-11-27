@@ -21,26 +21,37 @@
 ip = input('Inserisci IP: ')
 ip_list = ip.split('.')
 
+
+ip = input('Inserisci IP: ')
+ip_list = ip.split('.')
+ip_correct = False
+oct = ip.split('.')[0]
 #Verification programm
-for octet in ip_list:
+while not ip_correct:
     if len(ip_list) != 4:
         print('ip address sbagliato')
+        ip_correct = True 
         break
-    elif not octet.isnumeric():
-        print('ip address sbagliato')
-        break
-    elif octet >= '255':
-        print('ip address sbagliato')
-        break        
+    for int in ip_list:
+        if not int.isnumeric():
+            print('ip address sbagliato')
+            ip_correct = True    
+            break        
+        elif int > '255':
+            print('ip address sbagliato')
+            ip_correct = True
+            break
 #Main programm 
-oct = ip.split('.')[0]
-if '1' <= oct  <= '223':
-    print('unicast')
-elif '224'<= oct<= '239':
-    print('multicast')
-elif ip_list == ['255', '255', '255', '255']:
-    print('local broadcast')
-elif ip_list == ['0','0','0','0']:
-    print('unassigned')
-else:
-    print('unused')
+    else: 
+
+        if ip_list == ['255', '255', '255', '255']:
+            print('local broadcast')
+        elif ip_list == ['0','0','0','0']:
+            print('unassigned')
+        elif '1' <= oct  <= '223':
+            print('unicast')
+        elif '224'<= oct<= '239':
+            print('multicast')
+        else:
+            print('unused')
+    ip_correct = True
