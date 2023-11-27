@@ -1,3 +1,4 @@
+#!/usr/bin/env python3 
 # -*- coding: utf-8 -*-
 """
 Задание 6.2a
@@ -16,4 +17,32 @@
 даже если несколько пунктов выше не выполнены.
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
-"""
+""" 
+ip = input('Inserisci IP: ')
+ip_list = ip.split('.')
+
+#Verification programm
+for octet in ip_list:
+    if len(ip_list) == 4 and not octet.isnumeric():
+        print('ip address sbagliato')
+        break
+    elif octet >= '255':
+        print('ip address sbagliato')
+        break
+
+for int in ip_list:
+    if '1' <= octet  <= '223':
+        print('unicast')
+        break
+    elif '224'<= octet<= '239':
+        print('multicast')
+        break
+    if ip_list == ['255', '255', '255', '255']:
+        print('local broadcast')
+        break
+    elif ip_list == ['0','0','0','0']:
+        print('unassigned')
+        break
+    else:
+        print('unused')
+        break
