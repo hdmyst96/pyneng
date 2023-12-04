@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 7.2
@@ -38,4 +39,12 @@ interface Ethernet0/3
  spanning-tree portfast edge trunk
 ...
 
-"""
+""" 
+
+with open('config_sw1.txt', 'r') as f:
+    for line in f:
+        if line.startswith('!'):
+            pass
+        else :
+            print(line.rstrip())
+
