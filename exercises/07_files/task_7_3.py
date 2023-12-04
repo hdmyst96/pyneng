@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 7.3
@@ -20,3 +21,13 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+
+with open('CAM_table.txt') as file:
+    for line in file:
+        if line.startswith(' '):
+            vlan  =   line.lstrip(' ').split()[0]
+            mac =  line.lstrip(' ').split()[1]
+            port =  line.lstrip(' ').split()[-1]
+            if not vlan == 'Mac' and not mac == 'Address' and not port == 'Table':
+                print('{:6} {:17} {:5}'.format(vlan,mac,port))
+
