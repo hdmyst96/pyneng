@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 7.3a
@@ -40,6 +41,8 @@
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+result = []
+#Ho aperto il file/ ho estratto gli elementi che mi servono/ gli ho aggiutno in una lista 
 with open('CAM_table.txt') as file:
     for line in file:
         if line.startswith(' '):
@@ -47,5 +50,23 @@ with open('CAM_table.txt') as file:
             mac =  line.lstrip(' ').split()[1]
             port =  line.lstrip(' ').split()[-1]
             if not vlan == 'Mac' and not mac == 'Address' and not port == 'Table':
-                print('{:6} {:17} {:5}'.format(vlan,mac,port))
+                y ='{:6} {:17} {:5}'.format(vlan,mac,port)
+                y =''.join(y).split()
+                result.append(y)
+#ho transformato primo elemento di ogni lista in integer per poter sortare in seguito, poi ho  
+result1 = []
+for line in result:
+    tmp = []
+    for element in line:
+        if element.isdigit():
+            tmp.append(int(element))
+        else:
+            tmp.append(element)
+    result1.append(tmp)
+
+result1 = sorted(result1) 
+
+
+for line in result1:
+    print( '{:<6} {:17} {:5}'.format(line[0],line[1],line[2]))
 
