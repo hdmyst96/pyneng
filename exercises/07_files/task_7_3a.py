@@ -70,3 +70,21 @@ result1 = sorted(result1)
 for line in result1:
     print( '{:<6} {:17} {:5}'.format(line[0],line[1],line[2]))
 
+
+''' 
+  #Un altro metodo:
+mac_table = [] 
+
+with open("CAM_table.txt", "r") as conf:
+    for line in conf:
+        words = line.split()
+        if words and words[0].isdigit():
+            vlan, mac, __, intf = words 
+            mac_table.append([int(vlan), mac, intf])
+
+for vlan, mac, intf in sorted(mac_table)i:
+    print(f"{vlan:<9}{mac:20}{intf}")
+
+
+
+
