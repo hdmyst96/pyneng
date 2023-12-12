@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 9.1a
@@ -58,3 +59,8 @@ def generate_access_config(intf_vlan_mapping, access_template,pse = None):
             for ports in pse: 
                 result.append(ports)
     return result
+
+generate = generate_access_config(access_config,access_mode_template,port_security_template)
+
+for line in generate:
+    print(line)
