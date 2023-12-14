@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 9.3
@@ -23,3 +24,22 @@
 
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 """
+result  = ()
+access_intf = {}
+trunk_intf = {} 
+with open('config_sw1.txt') as file:
+    for line in file:
+       if "FastEthernet" in line:
+           intf = line.split()[-1]
+           access_intf[intf] = {}
+           trunk_intf[intf] = {}
+       elif "access vlan" in line:
+               vlan = line.split()[-1]
+               access_intf[intf] = int(vlan)
+       elif "allowed vlan" in line:
+              list_vlan = line.split()[-1].split(',') 
+              trunk_intf[intf] = [int(numb) for numb in list_vlan]
+
+access_intf = {key:value for key, value in access_intf.items() if not value == {}}
+trunk_intf  = {key:value for key, value in trunk_intf.items() if not value == {}}
+result = (access_intf,trunk_intf)  
