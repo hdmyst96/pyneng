@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 9.4
@@ -64,3 +65,21 @@ def ignore_command(command, ignore):
         if word in command:
             ignore_status = True
     return ignore_status
+
+def convert_config_to_dict(config_filename):
+    result = {}
+    with open(config_filename) as file:
+        for line in file:
+            if not ignore_command(line, ignore) and not line.startswith('!'):
+                if not line.startswith(' '):
+                    keys = line.strip('\n')
+                    result[keys] = []
+                    result = {key:value for key,value in result.items() if not key == ''}
+                elif line.startswith(' '):
+                    values = line.strip('\n').strip()
+                    result[keys].append(str(values))
+
+        return result
+
+print(convert_config_to_dict('config_sw1.txt'))
+
