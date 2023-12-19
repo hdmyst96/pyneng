@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 11.1
@@ -36,15 +37,21 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 
 def parse_cdp_neighbors(command_output):
-    """
-    Тут мы передаем вывод команды одной строкой потому что именно в таком виде будет
-    получен вывод команды с оборудования. Принимая как аргумент вывод команды,
-    вместо имени файла, мы делаем функцию более универсальной: она может работать
-    и с файлами и с выводом с оборудования.
-    Плюс учимся работать с таким выводом.
-    """
+    command_output  = command_output.split('\n')
+    result = {}
+    for line in command_output:
+         if "cdp" in line:
+             command = line.split('>')[0]
+         elif "S I" in line: 
+             intf = line.split()[1] + line.split()[2]
+             intf1 = line.split()[-2] + line.split()[-1]
+             dv = line.split()[0] 
+             result[(command,intf)] = (dv,intf1)
+    return result
+
+
 
 
 if __name__ == "__main__":
-    with open("sh_cdp_n_sw1.txt") as f:
+    with open("sh_cdp_n_r3.txt") as f:
         print(parse_cdp_neighbors(f.read()))
