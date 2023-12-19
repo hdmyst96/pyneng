@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 11.2
@@ -28,9 +29,25 @@ Cгенерировать топологию, которая соответст�
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 """
+from task_11_1 import  parse_cdp_neighbors
+
+
+def create_network_map(filenames):
+    return_result = {}
+    for file in filenames:
+        with open(file) as f:
+            f_read = parse_cdp_neighbors(f.read())
+            for key,value in f_read.items():
+                return_result[key] = value 
+    return return_result
+
+
 infiles = [
     "sh_cdp_n_sw1.txt",
     "sh_cdp_n_r1.txt",
     "sh_cdp_n_r2.txt",
     "sh_cdp_n_r3.txt",
-]
+] 
+
+if __name__ == "__main__":
+    print(create_network_map(infiles))
