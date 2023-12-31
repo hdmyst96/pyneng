@@ -1,3 +1,4 @@
+#!/usr/bin/env python3 
 # -*- coding: utf-8 -*-
 """
 Задание 15.1
@@ -23,3 +24,19 @@
 а не ввод пользователя.
 
 """
+import re
+
+
+def get_ip_from_cfg(config_file):
+    result = []
+    with open(config_file) as f:
+        for line in f:
+            match = re.search(r'ip address (\S+) (\S+)',line)
+            if match:
+                result.append(match.groups())
+        return result
+
+if __name__ == "__main__":
+
+    print(get_ip_from_cfg('config_r1.txt'))
+
