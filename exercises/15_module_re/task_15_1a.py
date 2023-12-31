@@ -1,4 +1,6 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
 Задание 15.1a
 
@@ -24,3 +26,30 @@
 а не ввод пользователя.
 
 """
+import re
+from pprint import pprint
+
+def get_ip_from_cfg(config_file):
+    result = {}
+    def_result = {}
+    with open(config_file) as f:
+        for line in f:
+            intf = re.search(r'^interface (\S+)',line)
+            ip_masks = re.search(r'ip address (\S+) (\S+)',line)
+            if intf:
+                intf_match = intf.group(1)
+                result[intf_match] = ()
+            elif ip_masks:
+                result[intf_match] = ip_masks.groups()
+        for key,value in result.items():
+            if not value == ():
+                def_result[key] = value
+        return def_result
+
+
+if __name__ == "__main__":
+    
+   result = get_ip_from_cfg('config_r1.txt')
+   pprint(result)
+
+
