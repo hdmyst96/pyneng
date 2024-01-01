@@ -29,6 +29,7 @@
 import re
 from pprint import pprint
 
+'''
 def get_ip_from_cfg(config_file):
     result = {}
     def_result = {}
@@ -48,8 +49,23 @@ def get_ip_from_cfg(config_file):
 
 
 if __name__ == "__main__":
-    
    result = get_ip_from_cfg('config_r1.txt')
    pprint(result)
+'''
 
+
+#Second variant
+
+def get_ip_from_cfg(config_file):
+    regex = r'interface (\S+)\n(?:.*\n)*? ip address (\S+) (\S+)'
+    result = {}
+    with open(config_file) as f:
+        match = re.finditer(regex,f.read())
+        for element in match:
+            result[element.group(1)] = element.group(2,3)
+    return result 
+
+if __name__ == "__main__":
+   result = get_ip_from_cfg('config_r2.txt')
+   pprint(result)
 
