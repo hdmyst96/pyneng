@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 15.4
@@ -24,3 +25,13 @@ interface Loopback0
 
 Проверить работу функции на примере файла config_r1.txt.
 """
+import re
+
+
+def get_ints_without_description(filename):
+    with open(filename) as f:
+        result = re.findall(r'interface ([^$]\S+)\n [^d].*',f.read())
+    return result 
+
+if __name__ == "__main__":
+    print(get_ints_without_description('config_r1.txt'))
