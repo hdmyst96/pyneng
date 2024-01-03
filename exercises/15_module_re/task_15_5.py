@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 15.5
@@ -26,3 +27,21 @@ description Connected to SW1 port Eth 0/1
 
 Проверить работу функции на файле sh_cdp_n_sw1.txt.
 """
+import re
+from pprint import pprint
+
+
+def generate_description_from_cdp(filename):
+    template = "description Connected to {} port {}"
+    result = {}
+    with open(filename) as f:
+        match = re.finditer(r'(?P<device>\S+) +(?P<intf>(?:\S+) (?:\S+)) +\d+.* \d+ +(?P<Port>(?:\S+) (?:\S+))', f.read() )
+        if match:
+            for element in match:
+                device = element.group('device')
+                port = element.group('Port')
+                result[element.group('intf')] = template.format(device,port)
+            return result 
+
+if __name__ == "__main__":
+    pprint(generate_description_from_cdp('sh_cdp_n_sw1.txt'))
