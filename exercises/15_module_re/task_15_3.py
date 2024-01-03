@@ -1,4 +1,6 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
 Задание 15.3
 
@@ -32,3 +34,23 @@ object network LOCAL_10.1.9.5
 
 Во всех правилах для ASA интерфейсы будут одинаковыми (inside,outside).
 """
+import re
+
+
+def convert_ios_nat_to_asa(orgfile,rplfile):
+    with open(orgfile) as src, open(rplfile,'w') as dest:
+        for line in src:
+            replace = re.sub(r'(ip) (nat) (inside).*(tcp) (?P<ip>\S+) (?P<port>\d+) (?P<intfword>\S+) \S+ (\d+)',
+                             r'object network LOCAL_\5\n'
+                             r' host \5\n'
+                             r' \2 (\3,outside) static \7 service \4 \6 \8',line)
+            if replace:
+                dest.write(replace)
+        return rplfile 
+
+if __name__ == "__main__":
+    convert_ios_nat_to_asa('cisco_nat_config.txt','cisco_nat_replace.txt')
+
+
+
+

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3 
 # -*- coding: utf-8 -*-
 """
 Задание 15.2
@@ -21,3 +22,25 @@
 Проверить работу функции на примере файла sh_ip_int_br.txt.
 
 """
+import re
+from pprint import pprint
+
+def parse_sh_ip_int_br(filename):
+    result = []
+    regex = (r'(\S+) +((?:\d+.)+(?:\d)).*manual (\S+).+?(?P<port2>\S+)|'
+             r'(\S+) +(\S+).*unset +((?:\S+) (?:\S+)) (\S+)')
+    with open(filename) as f:
+        for line in f:
+            match = re.search(regex,line)
+            if match:
+                if match.lastgroup == 'port2':
+                    result.append(match.group(1,2,3,4))
+                else:
+                    result.append(match.group(5,6,7,8))
+        return result     
+
+
+if __name__ == "__main__":
+
+   pprint(parse_sh_ip_int_br('sh_ip_int_br.txt'))
+
