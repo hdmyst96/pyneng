@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 17.1
@@ -31,3 +32,18 @@ sw3,00:E9:22:11:A6:50,100.1.1.7,3,FastEthernet0/21
 sw2_dhcp_snooping.txt, sw3_dhcp_snooping.txt.
 
 """
+def write_dhcp_snooping_to_csv(filenames,output):
+    with open(output, 'w') as dest:
+        headers = ['switch','mac','ip','vlan','interface']
+        writer = csv.writer(dest)
+        writer.writerow(headers)
+        for file in filenames:
+            with open(file) as src:
+                switchname = src.name.split('_')[0]
+                for line in src:
+                    match = re.match(r'\w+:',line)
+                    if match:
+                         mac,ip,*rest,vlan,intf = line.split()
+                         data = [switchname,mac,ip,vlan,intf]
+                         writer.writerow(data)
+
