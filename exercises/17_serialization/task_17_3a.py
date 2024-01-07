@@ -1,3 +1,4 @@
+#!/usr/bin/env python3 
 # -*- coding: utf-8 -*-
 """
 Задание 17.3a
@@ -36,3 +37,24 @@
 в файл topology.yaml. Он понадобится в следующем задании.
 
 """
+import re
+import yaml
+from task_17_3 import parse_sh_cdp_neighbors
+from pprint import pprint 
+
+def generate_topology_from_cdp(list_of_files,save_to_file=None):
+    result = {}
+    for file in list_of_files:
+        with open(file) as f:
+            f=f.read()
+            result.update(parse_sh_cdp_neighbors(f))
+    if save_to_file:
+        with open(save_to_file, 'w') as dest:
+            yaml.dump(result,dest)
+    return result
+
+
+if __name__ == "__main__":
+    fileslist = ['sh_cdp_n_sw1.txt','sh_cdp_n_r1.txt','sh_cdp_n_r2.txt','sh_cdp_n_r3.txt','sh_cdp_n_r4.txt','sh_cdp_n_r5.txt','sh_cdp_n_r6.txt' ]
+
+    pprint(generate_topology_from_cdp(fileslist,'topology2.yaml'))
