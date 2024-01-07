@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 17.3
@@ -24,3 +25,23 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Проверить работу функции на содержимом файла sh_cdp_n_sw1.txt
 """
+import re
+from pprint import pprint
+
+def parse_sh_cdp_neighbors(output_cdp):
+    result = {}
+    for line in output_cdp.split('\n'):
+         match = re.search(r'(?P<device>\w+)>',line)
+         match2 = re.search(r'(?P<device2>\S+) +(?P<intf1>\S+ \S+) +\d+ +(?:\w+ )+ +\S+ +(?P<intf2>\S+ \S+)',line)
+         if match:
+             device =(match.group('device'))
+             result[device] = {}
+         elif match2:
+             device2,intf1,intf2 =  match2.groups()
+             result[device][intf1] = {device2:intf2}
+    return result
+
+
+if __name__ == "__main__":
+    with open('sh_cdp_n_sw1.txt') as file:
+        pprint(parse_sh_cdp_neighbors(file.read()))
