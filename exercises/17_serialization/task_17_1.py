@@ -32,6 +32,10 @@ sw3,00:E9:22:11:A6:50,100.1.1.7,3,FastEthernet0/21
 sw2_dhcp_snooping.txt, sw3_dhcp_snooping.txt.
 
 """
+import csv
+import re 
+
+
 def write_dhcp_snooping_to_csv(filenames,output):
     with open(output, 'w') as dest:
         headers = ['switch','mac','ip','vlan','interface']
@@ -46,4 +50,11 @@ def write_dhcp_snooping_to_csv(filenames,output):
                          mac,ip,*rest,vlan,intf = line.split()
                          data = [switchname,mac,ip,vlan,intf]
                          writer.writerow(data)
+
+
+dhcp_files = ['sw1_dhcp_snooping.txt',
+'sw2_dhcp_snooping.txt', 'sw3_dhcp_snooping.txt']
+
+write_dhcp_snooping_to_csv(dhcp_files, 'new.csv')
+
 

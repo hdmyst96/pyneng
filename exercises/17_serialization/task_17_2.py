@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 17.2
@@ -42,10 +43,38 @@
 
 Кроме того, создан список заголовков (headers), который должен быть записан в CSV.
 """
-
+import re
 import glob
+import csv
 
-sh_version_files = glob.glob("sh_vers*")
-# print(sh_version_files)
+
+def parse_sh_version(shv_output):
+    regex = r'Cisco .+?Version (?P<ios>\d+.\w\(\w+\)\w+).* uptime is (?P<uptime>\w+ \S+ \w+ \S+ \w+ \S+).+file is (?P<image>\"\S+\")'
+    match = re.search(regex,shv_output,re.DOTALL).group('ios','image','uptime')
+    result = tuple(elements.strip('"') for elements in match)
+    return result
+
 
 headers = ["hostname", "ios", "image", "uptime"]
+
+
+def write_invetory_to_csv(data_filenames,csv_filename):
+    with open(csv_filename, 'w') as dest:
+        writer = csv.writer(dest)
+        writer.writerow(headers)
+        for file in data_filenames:
+             with open(file) as src:
+                 r = re.search(r'sh_version_(\w+).txt',file).group(1)
+                 src = src.read()
+                 src = list(parse_sh_version(src))
+                 src.insert(0,r)
+                 writer.writerow(src)
+
+
+
+sh_version_files = glob.glob("sh_vers*")
+print(sh_version_files)
+write_invetory_to_csv(sh_version_files,'my_new_file.csv')
+
+
+
