@@ -1,0 +1,64 @@
+		Regex(regular expression)
+syntax:		import re
+  			re.search(regex, string)
+			al ritorno sara un oggetto 'match' con cui si puo lavorare
+			match.group() -- fa vedere le coincidenze 			
+
+-- sono dei simboli normali/speciali consecutivi. Si usa per cercare coincidenze nella stringa 
+
+Syntax regex:
+
+'\d' -- una cifra, se aggiunto '+' signica una cifra che viene repetuta una o piu volte
+'\D' -- tutti simboli tranne le cifre
+
+'s'  -- tutti whitespace simboli
+'\S' -- tutto(lettere,cifre,simboli speciali), tranne whitespace simboli
+
+'\w' -- ogni lettera,cifra e '_' - trattino
+'\W' -- tutto tranne lettera e cifra 
+
+Simboli di ripetezione(fa referimento non a un simbolo ma alla espressione):
+
+regex+ -- una o piu ripetezioni del elemento precedente 
+regex* -- zero o piu di una ripetizione
+regex? -- zero o solo una ripetizione
+regex{n} -- n - indica numero esatto quante volte deve un elemento ripetersi
+regex{n,m} -- ripetere in un range di volte 
+regex{n,}  -- ripetere n volte e piu
+
+
+Special symbol:
+
+'.' -- ogni simbolo tranne quello della nuova stringa '\n'
+'^' -- l'inizio della stringa
+'$' -- la fine della stringa 
+[abc] -- tutti i simboli che sono indicati nella parentesi, si puo indicare un range
+[^abc] -- tutti i simboli tranne quello che c'e dentro parentesi 
+a|b -- a or b 
+
+Gruppi:
+
+() -- per crearea una gruppa nella espressione 
+.groups - tutto il  gruppo di elementi in un tuple
+
+(?P<name>regex) -- si usa per dare un nome alla gruppa
+?: -- per disattivare capture
+
+Lookarounds:
+
+(?=name) - si usa nel caso si vuole selettare solo gli elementi che hanno dopo di loro il nome indicato nel 'name'
+(?!name) - il contrario della parte sopra
+
+
+
+		Modulo re 
+funzione re.search() -- cerca nella intera stringa prima coincidenza
+funzione re.match() -- cerca al inzio della stringa 
+funzione re.finditer() -- Cerca nel intero file
+						  Si usa per trovare tutte le coincidenze nel file
+						  al ritorno ti da un iterator con gli oggetti del match
+funzione re.findall() -- come sopra cerca coincidenze nel intero file solo che
+                         al ritorno saranno dei datatype diversi a seconda della stituazione
+
+funzione re.compile() -- ricompila l'esspresione regolare 
+

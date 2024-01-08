@@ -1,5 +1,5 @@
 								Scripts
-	Deve iniziare con #!/user/bin/env python3 
+	Deve iniziare con #!/usr/bin/env python3 
 	Devono avere il format .py alla fine 
 
 	'\n'.join(name) - per transformare una lista in una singola string

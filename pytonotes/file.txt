@@ -1,0 +1,46 @@
+with - commando per apripre file
+with open(file.txt) as f -- syntax (f - aprire il file in una variabile )
+	print(f.read) - per leggere il file
+
+	f = open(.txt) - modulo per aprire file
+	r; w; a; i modi per come apripre il file (obligatorio)
+	a - append (aggiungere) 
+
+		Read
+	
+	f.read() - transforma il testo in una stringa
+	f.readlines - transforma il testo in una lista con elementi 
+	f.readline - mostra solo una stringa
+
+	while True:
+    line = f.readline()
+    print(line)
+    if not line:	---- if not true 
+        break		--- Mostra il testo una string alla volta 
+
+	for line in  f:
+    print(line)      --- un altro metodo per far mostrare stringa dopo stringa  
+
+		Write (w;w+)
+	
+	f.write()- scrivere nel file una stringa 
+	f.close - chiudere per poter poi leggere 
+
+	f = open('newfile.txt','w')
+for line in cfg_lines:
+    f.write(line+'\n') --- per copiare un testo in un file con ciclo for 
+ oppure
+
+ 	f.write('\n'.join(cfg_lines))
+
+
+with open('r1.txt') as src, open('result.txt', 'w') as dest:
+    for line in src:
+        if line.startswith('service'):
+            print(line.rstrip())
+            dest.write(line)  ------ un modo per scrivere un testo da un file in un altro 
+	
+
+
+
+

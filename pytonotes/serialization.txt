@@ -1,0 +1,50 @@
+				CSV
+	
+	import csv 
+	
+	Per leggere i dati:
+	
+	with open(file) as f :
+	result=	csv.reader(f) -- per aprire e leggere un file CSV
+	header = next(reader) -- se si vuole avere i headers separatamente dal contenuto della tabella
+	reader = csvDictReader(f, fieldnames =['i headers se non ci sono']) -- se si vuole avvere un dizionario con i dati
+	
+	 Per scrivere i dati in un file csv :
+	 
+	 with open('my_new_data.csw', 'w') as f:
+	 writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC -- se si vuole che tutti gli elementi vengono rappresentati con "" )
+	 for line in data:
+	 	writer.writerow(line) - per scrivere nel file riga su riga
+		writer.writerrows(data) - per scrivere file intero
+		writer = csv.DictWriter(f,fieldnames=(data[0].keys()),quoting=csv.QUOTE_NONNUMERIC) - se si vuole srivere un dizioniario nel file csv (inserimento del fieldnames obbligatorio!!!)
+		writer.writerows(data) - per aggiungere i headers nel file indicati sopra 
+
+
+				JSON
+
+ 	import json
+
+	Per leggere i dati:
+
+	json.load(file)  - Lavoro con i file
+	json.loads(file) - Se i dati sono arrivati in forma di una stringa
+
+	Per scrivere i dati:
+
+	json.dumps(data,file) -- per iscrivere nel formato della stringa
+	json.dump(data,file) -- per iscrivere file intero
+	json.dump(data,file, indent=2) -- per iscrivere il file in un modo piu leggibile per uomo
+    '' 				skipkeys=True -- per ignorare i keys sbagliati
+
+
+				YAML
+
+	import yaml
+
+	Per leggere i dati:
+
+	yaml.load(f)
+
+	Per scrivere i dati:
+
+	yaml.dump(data, file)

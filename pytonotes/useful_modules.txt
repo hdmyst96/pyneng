@@ -1,0 +1,32 @@
+			Modulo subprocess
+
+Permette di creare processi nuovi
+Si usa per attivare commandi usando python, tipo: ping, ls, ecc
+
+Syntax: 	import subprocess
+			subprocess.run()
+
+stdout=subprocess.PIPE -- si usa per scrivere in una variabile il output del commando, risultato sara in byte
+stdout=subprocess.PIPE,encoding='utf-8' -- risultato sara normale come una stringa, non in byte come sopra indicato
+
+stderr=subprocess.PIPE -- si usa per lavorare con con gli output di errori di un commando
+
+.returncode -- si usa per capire se il commando e andato a buon fine '0' oppure no altre cifre come ,'1','2', ecc 
+
+			Modulo os
+
+Permette di lavorare con il filesystem
+
+os.listdir() -- si usa per elencare tutti i file
+os.path.isdir() -- si usa per controllare se e una direzione o meno 
+os.path.isfile() -- si usa per controllare se un elemento e un file o meno 
+
+			Modulo ipaddress
+
+Un modulo che permette di lavorare con ip-addresses
+Ha tre funzioni principali: ip-address (ipaddress.ip_address('IP') -- crea un ogetto con IP v4,v6 dentro
+
+Network (ipaddress.ip_network(ip/mask) -- per controllare se un ip fa parte del network o meno
+
+Ip-interface ipaddress.ip_interface(ip/mask) -- ritorna un ogetto con ip e mask insieme 
+

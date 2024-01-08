@@ -1,0 +1,39 @@
+			Unicode
+	
+	Il computer lavora solo con i byte 
+	File,database,networking ecc -- sono tutto dei byte
+
+	Encode - dice che una lettera sara rappresentata in byte con dei numeri precisi
+
+			Ascii standard - - un carattere = un byte
+
+1 - 32 rappresentano i caratteri speciali
+32 - 127 lettere del alfabeto
+
+Non era abbastanza per rappresentare tutti i simboli in tutte le lingue del mondo, per questo e stato inventato standard UNiCODE
+	
+					
+			Unicode
+
+	Ad ogni carattere gli viene assegnato un codice(non byte)
+	Il alfabeto latino semplice coincide con quello del ASCI standard
+	
+	Per trasformare(convertire) tutti questi codici in byte vengono usati gli encodes (codifici):
+	
+	UTF-8, UTF-16, UTF-32 (piu importanti encodes(codifici), ce ne sono tantissimi) -- convertiscono il codice Unicode in byte
+
+			Python
+
+	String --tutti sono  dei unicode code che si susseguono
+	.encode() -- per trasformare unicode string in bytes (str > bytes)
+	.decode() -- per trasformare i bytes in unicode string (bytes > str)
+
+		Come lavorare con i bytes ?
+		Systema Unicode-sandwich
+
+	Fuori bytes (decode) >> dentro programma lavoriamo con Unicode >> Fuori bytes (encode)
+
+
+
+
+

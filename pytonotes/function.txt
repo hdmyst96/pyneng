@@ -1,0 +1,38 @@
+								   Functions
+
+ Funzione - e un insieme di codice che puo essere usato piu volte nella stessa  programma oppure nelle altre programme
+ 
+ Syntax: def sum(a,b):
+ 			 return a+b -- creare una funzione
+		
+ 			 sum(10,2)  -- chiamare la funzione 
+
+
+ def -- define 
+ sum -- il nome della funzione
+ (10,2) -- gli argomenti della funzione ( dati reali)
+ (a,b) -- i parametri della funzione (sono dei variabili quando si crea una funzione)
+ return -- 1. ferma la funzione(uguale al break nel ciclo)  2. fa ritornare un risultato che di seguito potra essere incapsulato in una variabile
+
+								   Parametri
+
+ Ci sono parametri obbligatori e non obbligatori es: (a,b) --obbligatorio
+ 												     (a,b, c = True) -c non obbligatorio(di default)
+
+								   Argomenti
+
+ func(*args) -- * (asterics) vuol dire che si puo inserire una qualsiasi quantita di elementi nel momento che viene usata la funzione, es
+		     -- * si usa anche per fare unpacking dei variabili 
+	
+def func(*args)
+	print(args)
+
+func(1,2,3,4,5)  - risultato sara sempre "tuple"
+
+ func(**kwargs) -- ** metti gli elementi nel ordine key:value (dizionario), es
+
+def func(*kwargs):
+	print(kwargs)
+
+func(a=1, a=5) -- risultato sara un dizionario di tipo {'a' : 1, 'b' : 5}
+

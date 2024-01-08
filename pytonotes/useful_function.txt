@@ -1,0 +1,47 @@
+		Funzione print
+
+sep='' -- segliere il modo di delimitazione 
+end='' -- il delimitatore che mettiamo alla fine 
+
+		Funzione range
+Sintassi completa :
+
+range(start)
+range(start,stop)
+range(start,stop,step)
+
+		Funzione sorted 
+
+La funzione fa ritornare sempre una lista 
+
+from operator import itemgetter
+sorted(data, key=itemgetter(1)) - per scegliere l'index con cui si vuole sortare l'elementi
+
+key=int, len
+reverse=True -- scegliere il modo crescente o decrescente
+key=str.lower -- sortare tutti gli elementi trasformandoli nelle lettere minuscole 
+
+		Funzione enumerate()
+
+Gli dai degli elementi e al ritorno ti da l'elemento e l'index insieme 
+
+		Funzione zip()
+
+Ti permette di unire 2 liste e creare per esempio un dizionario
+
+		Funzione all
+
+Ritorna TRUE se TUTTI elementi sono Veri 
+
+		Funzione any
+
+Ritorna TRUE se almeno un elemento  e Vero
+
+		Funzione map
+
+Fa lo stesso quella che fa il generatore delle liste. Meglio usare il generatore delle liste 
+
+		Funziione Lambda
+
+Una funzione anonima 
+
