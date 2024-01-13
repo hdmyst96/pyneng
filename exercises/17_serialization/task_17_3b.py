@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Задание 17.3b
@@ -43,3 +44,24 @@
 > pip install graphviz
 
 """
+import yaml
+from draw_network_graph import draw_topology
+
+
+def transform_topology(filename):
+    with open(filename) as f:
+        result = {}
+        sorted_result = []
+        f = yaml.load(f)
+        for key,value in f.items():
+            for intkey,intvalue in value.items():
+                result[(key,intkey)] = ()
+                for intintkey,intintvalue in intvalue.items():
+                    result[(key,intkey)] = (intintkey,intintvalue)
+        sorted_result = set(tuple(sorted([r_key,r_value])) for r_key, r_value in result.items())
+        draw_topology(dict(sorted_result))
+
+
+
+transform_topology('topology.yaml')
+
