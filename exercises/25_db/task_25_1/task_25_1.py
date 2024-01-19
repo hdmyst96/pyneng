@@ -81,3 +81,41 @@ $ python add_data.py
 Часть кода может быть глобальной.
 
 """
+def create_dhcp_snooping_db(dbfilename):
+    '''
+    La funzione crea  la tabella dhcp_snooping.db;
+    dentro la schema gia completata;
+    come argomento prende il nome del file,
+    di solito dhcp_snooping.db
+    '''
+    connection = sqlite3.connect(dbfilename)
+    try:
+        with open('dhcp_snooping_schema.sql') as file:
+            schema = file.read()
+            connection.executescript(schema)
+            print('Sto creando la tabella...')
+    except sqlite3.OperationalError:
+        print('La tabella e gia creata')
+
+def control_db_exists(dbfilename):
+    '''
+    La funzione richiede un argomento con
+    il nome del database, poi controlla se 
+    il db esiste, ritorna TRUE, in caso contrario
+    FALSE
+    '''
+    db_exists = os.path.exists(dbfilename)
+    return db_exists
+
+def insert_data_db(query, data):
+    '''
+    La funzione richiede come argomento di inserire il query(template)
+    e la data da inserie nella tabella
+    '''
+    for row in data:
+        try:
+            connect.execute(query,row)
+            connect.commit()
+        except sqlite3.IntegrityError as error:
+            print('Adding data: {} found an error: '.format(row),error)
+
