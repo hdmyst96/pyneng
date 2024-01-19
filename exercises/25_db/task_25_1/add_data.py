@@ -1,14 +1,27 @@
 #!/usr/bin/env python3
 
-import sqlite3 
-import os 
+import sqlite3
 import re
+import os
 import yaml
-dhcp_snooping = ['sw1_dhcp_snooping.txt','sw2_dhcp_snooping.txt','sw3_dhcp_snooping.txt']
-switches = 'switches.yml'
 
-#Controllare se il database esiste
-db_exists = os.path.exists('dhcp_snooping.db')
+def control_db_exists(dbfilename):
+    '''
+    La funzione richiede un argomento con
+    il nome del database, poi controlla se 
+    il db esiste, ritorna TRUE, in caso contrario
+    FALSE
+    '''
+    db_exists = os.path.exists(dbfilename)
+    return db_exists
+
+def insert_data_db(query, data):
+    for row in data:
+        try:
+            connect.execute(query,row)
+            connect.commit()
+        except sqlite3.IntegrityError as error:
+            print('Adding data: {} found an error: '.format(row),error)
 
 
 #parsing switches data
@@ -18,6 +31,9 @@ with open('switches.yml') as file:
     for key,value in result.items():
         for int_key,int_value in  value.items():
             switches_parsed.append((int_key,int_value))
+
+dhcp_snooping = ['sw1_dhcp_snooping.txt','sw2_dhcp_snooping.txt','sw3_dhcp_snooping.txt']
+
 
 #parsing dhcp snooping database
 dhcp_snooping_parsed = []
@@ -32,26 +48,15 @@ for element in dhcp_snooping:
             if match:
                 dhcp_snooping_parsed.append(match.groups() + intf)
 
-connect = sqlite3.connect('dhcp_snooping.db')
-
-#Insert switches data in database
 switch_query = 'INSERT INTO switches values (?, ?)'
-print('Add data to table switches')
-for row in switches_parsed:
-    try:
-        connect.execute(switch_query,row)
-        connect.commit()
-    except sqlite3.IntegrityError as error:
-        print('Adding data: {} found an error: '.format(row),error)
-
-#Insert dhcp snooping  data in database
 dhcp_snooping_query = 'INSERT INTO dhcp VALUES(?, ?, ?, ?, ?)'
-print('Add data to table dhcp')
-for row in dhcp_snooping_parsed :
-    try:
-        connect.execute(dhcp_snooping_query,row)
-        connect.commit()
-    except sqlite3.IntegrityError as err:
-        print('Adding data: {} found an error: '.format(row),err)
 
-connect.close()
+db_exists = control_db_exists('dhcp_snooping.db')
+if db_exists:
+    connect = sqlite3.connect('dhcp_snooping.db')
+    print('Sto aggiungendo swith data in database')
+    insert_data_db(switch_query,switches_parsed)
+    print('Sto aggiungendo dhcp data in database')
+    insert_data_db(dhcp_snooping_query,dhcp_snooping_parsed)
+else: 
+    print('Il database non esiste. Deve essere prima creato!')
