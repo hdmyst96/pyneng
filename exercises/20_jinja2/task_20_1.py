@@ -17,7 +17,19 @@
 указывать текущий каталог в FileSystemLoader - то есть НЕ надо делать так FileSystemLoader(".").
 Указание текущего каталога, сломает работу других заданий/тестов.
 """
+import os
 import yaml
+from jinja2 import Environment, FileSystemLoader
+
+
+def generate_config(template,data_dict):
+    templ_dir, templ_file = os.path.split(template)
+    env = Environment(
+        loader=FileSystemLoader(templ_dir),
+        trim_blocks=True,
+        lstrip_blocks=True)
+    temp = env.get_template(templ_file)
+    return temp.render(data_dict) 
 
 
 # так должен выглядеть вызов функции
