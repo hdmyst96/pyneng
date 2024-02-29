@@ -12,3 +12,23 @@
 
 Для проверки измените IP-адрес на устройстве или в файле devices.yaml.
 """
+def send_show_command(device,command):
+    print( "Connect to {}".format(device['host']) )
+    try:
+        with  netmiko.ConnectHandler(**device) as ssh:
+            ssh.enable()
+            return ssh.send_command(command)
+    except (netmiko.NetmikoAuthenticationException,netmiko.NetmikoTimeoutException) as err:
+        print(err)
+
+if __name__ == "__main__":
+    command = "sh ip int br"
+
+    dev = {'device_type': 'cisco_ios',
+           'host': '192.168.100.9',
+            'username': 'cisco',
+            'password': 'cisco',
+            'secret': 'cisco',
+            'timeout': 10}
+
+    send_show_command(dev,command)

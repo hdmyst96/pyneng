@@ -20,6 +20,12 @@
 import yaml
 
 
+def send_show_command(device,command):
+    print( "Connect to {}".format(device['host']) )
+    with  netmiko.ConnectHandler(**device) as ssh:
+        ssh.enable()
+        return  ssh.send_command(command)
+
 
 if __name__ == "__main__":
     command = "sh ip int br"

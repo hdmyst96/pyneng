@@ -47,6 +47,28 @@ In [16]: send_commands(r1, config=commands)
 Out[16]: 'config term\nEnter configuration commands, one per line.  End with CNTL/Z.\nR1(config)#username user5 password pass5\nR1(config)#username user6 password pass6\nR1(config)#end\nR1#'
 
 """
+import netmiko
+from task_18_1 import send_show_command
+from task_18_2 import send_config_commands
 
-commands = ["logging 10.255.255.1", "logging buffered 20010", "no logging console"]
-command = "sh ip int br"
+
+def send_commands(device, *,show=False, config=False):
+        if show and config:
+            raise ValueError("Devi inserire solo un argomento")
+        elif show:
+            print(send_show_command(device,show))
+        elif config:
+            print(send_config_commands(device,config))
+
+if __name__ == "__main__":
+    commands = ["logging 10.255.255.1", "logging buffered 20010", "no logging console"]
+    command = "sh ip int br"
+    r1 = {'device_type': 'cisco_ios',
+             'host': '192.168.100.1',
+             'username': 'cisco',
+             'password': 'cisco',
+             'secret': 'cisco',
+             'timeout': 10}
+    #send_commands(r1,show=command)
+    send_commands(r1,config=commands)
+    # send_commands(r1,show=command,config=commands)

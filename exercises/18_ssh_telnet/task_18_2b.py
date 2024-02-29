@@ -92,9 +92,45 @@ R1(config)#logging
 R1(config)#a
 % Ambiguous command:  "a"
 """
+import yaml
+import netmiko
+from pprint import pprint
+import re
 
-# списки команд с ошибками и без:
-commands_with_errors = ["logging 0255.255.1", "logging", "a"]
-correct_commands = ["logging buffered 20010", "ip http server"]
 
-commands = commands_with_errors + correct_commands
+def send_config_commands(device,config_commands,log=True):
+    if log:
+        print(f"Connect to {device['host']}")
+    good_result = {}
+    bad_result = {}
+    with netmiko.ConnectHandler(**device) as ssh:
+            ssh.enable()
+            for command in config_commands:
+                output = ssh.send_config_set(command)
+                match = re.search(r'(Invalid.+marker.)|'
+                                  r'(Incomplete command.)|'
+                                  r'(Ambiguous.*")',output,re.DOTALL)
+                if match:
+                    print(f'Commanda "{command}" ha prodotto un errore di tipo: "{match.group()}" sul dispositivo "{device["host"]}"')
+                    bad_result[command] = output
+                else:
+                    good_result[command] = output
+    result = good_result,bad_result
+    return result
+
+
+if  __name__  == "__main__":
+    # списки команд с ошибками и без:
+    commands_with_errors = ["logging 0255.255.1", "logging", "a"]
+    correct_commands = ["logging buffered 20010", "ip http server"]
+
+    commands = commands_with_errors + correct_commands
+    host = {'device_type': 'cisco_ios',
+               'host': '192.168.100.1',
+               'username': 'cisco',
+               'password': 'cisco',
+               'secret': 'cisco',
+               'timeout': 10}
+
+    result = send_config_commands(host,commands)
+    pprint(result)
