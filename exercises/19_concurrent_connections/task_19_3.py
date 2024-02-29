@@ -39,11 +39,25 @@ router ospf 1
 
 Проверить работу функции на устройствах из файла devices.yaml и словаре commands
 """
+def send_command_to_devices(devices,commands_dict,filename,limit=3):
+    with ThreadPoolExecutor(max_workers=limit) as executor:
+        for device in devices: 
+            for ip,command in commands_dict.items():
+                if device["host"] == ip:
+                    future = executor.submit(send_show,device,command) 
+                    with open(filename, "a") as dest: 
+                        dest.writelines(future.result()) 
 
-# Этот словарь нужен только для проверки работа кода, в нем можно менять IP-адреса
-# тест берет адреса из файла devices.yaml
-commands = {
-    "192.168.100.3": "sh run | s ^router ospf",
-    "192.168.100.1": "sh ip int br",
-    "192.168.100.2": "sh int desc",
-}
+
+
+if __name__ == "__main__":
+    commands = {
+        "192.168.100.3": "sh run | s ^router ospf",
+        "192.168.100.1": "sh ip int br",
+        "192.168.100.2": "sh int desc",
+    }
+
+    with open("devices.yaml") as file:
+        devices = yaml.safe_load(file)
+
+    send_command_to_devices(devices,commands,"result.txt")

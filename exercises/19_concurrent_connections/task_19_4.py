@@ -105,3 +105,45 @@ R3#
 
 Для выполнения задания можно создавать любые дополнительные функции.
 """
+import netmiko
+import yaml
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+
+def send_show(device,command):
+    with netmiko.ConnectHandler(**device) as ssh:
+        ssh.enable()
+        prompt = ssh.find_prompt()
+        output = prompt+command
+        result = ssh.send_command(command)
+        return output + '\n'+result + '\n'
+
+
+def send_config(device,config_command):
+    with netmiko.ConnectHandler(**device) as ssh:
+        ssh.enable()
+        result = ssh.send_config_set(config_command)
+        return result
+
+
+def send_commands_to_devices(devices,filename,*,show=None,config=None,limit=3):
+    with ThreadPoolExecutor(max_workers=limit) as executor:
+        if show and config:
+            raise ValueError("You need to insert one argument")
+        for device in devices:
+            if show:
+                future = executor.submit(send_show,device,show)
+                with open(filename,'a') as dest:
+                    dest.writelines(future.result())
+            if config:
+                future = executor.submit(send_config,device,config)
+                with open(filename, 'a') as dest:
+                    dest.writelines(future.result())
+
+
+if __name__ == "__main__":
+    with open("devices.yaml" ) as file:
+        devices = yaml.safe_load(file)
+
+    send_commands_to_devices(devices,"result.txt",show="sh clock")
+
