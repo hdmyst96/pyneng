@@ -13,8 +13,14 @@ with open('dhcp_snooping_schema.sql') as f:
     conn.executescript(f.read())
 
 query = 'INSERT into switch values (?, ?, ?, ?)'
-conn.executemany(query,data)
-conn.commit()
+for line in data:
+    try:
+        with conn: # start transaction
+            conn.execute(query,line)
+                   # commit 
+    except sqlite3.IntegrityError as err:
+        print('Error', err )
+
 
 for row in conn.execute("select * from switch"):
     print(row)

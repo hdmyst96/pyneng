@@ -1,0 +1,9 @@
+Value network (\S+)
+Value ad (\d+)
+Value metric (\d+)
+Value List nhop (\S+)
+
+Start 
+  ^O -> Continue.Record
+  ^O +${network} +\[${ad}/${metric}\] +via +${nhop}, 
+  ^ +\[${ad}/${metric}\] +via +${nhop}, 
